@@ -35,11 +35,11 @@ public class MainActivity extends Activity {
         title.setTextColor(Color.BLACK);
 
         TextView info = new TextView(this);
-        info.setText("\n1. Allow overlay permission.\n2. Allow screen capture.\n3. Start the floating assistant.\n\nThe assistant can inspect captured frames and show manual placement suggestions. It never auto-taps the game.");
+        info.setText("\n1. Allow overlay permission.\n2. Allow screen capture.\n3. Start the floating assistant.\n4. Or use the Block Blast Solver directly.\n");
         info.setTextSize(16);
 
         Button overlay = new Button(this);
-        overlay.setText("1 • Allow Overlay");
+        overlay.setText("1 - Allow Overlay");
         overlay.setOnClickListener(v -> {
             if (!Settings.canDrawOverlays(this))
                 startActivity(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -47,20 +47,24 @@ public class MainActivity extends Activity {
         });
 
         Button capture = new Button(this);
-        capture.setText("2 • Allow Screen Capture");
+        capture.setText("2 - Allow Screen Capture");
         capture.setOnClickListener(v -> {
             MediaProjectionManager m = (MediaProjectionManager)getSystemService(MEDIA_PROJECTION_SERVICE);
             startActivityForResult(m.createScreenCaptureIntent(), CAPTURE_REQUEST);
         });
 
         Button start = new Button(this);
-        start.setText("3 • Start AI Woody");
+        start.setText("3 - Start AI Woody");
         start.setOnClickListener(v -> {
             if (Settings.canDrawOverlays(this))
                 startService(new Intent(this, OverlayService.class));
         });
 
-        l.addView(title); l.addView(info); l.addView(overlay); l.addView(capture); l.addView(start);
+        Button solver = new Button(this);
+        solver.setText("4 - Block Blast Solver");
+        solver.setOnClickListener(v -> startActivity(new Intent(this, SolverActivity.class)));
+
+        l.addView(title); l.addView(info); l.addView(overlay); l.addView(capture); l.addView(start); l.addView(solver);
         setContentView(l);
     }
 
