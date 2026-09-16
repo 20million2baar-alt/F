@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.core.app.ActivityCompat;
 import android.provider.Settings;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -15,7 +19,10 @@ public class MainActivity extends Activity {
     private static final int CAPTURE_REQUEST = 1001;
 
     @Override public void onCreate(Bundle b) {
-        super.onCreate(b);
+        super.onCreate(b)if (Build.VERSION.SDK_INT >= 33 &&
+    checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 100);
+}
 
         LinearLayout l = new LinearLayout(this);
         l.setOrientation(LinearLayout.VERTICAL);
