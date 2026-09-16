@@ -18,11 +18,14 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
     private static final int CAPTURE_REQUEST = 1001;
 
-    @Override public void onCreate(Bundle b) {
-        super.onCreate(b)if (Build.VERSION.SDK_INT >= 33 &&
-    checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 100);
-}
+        @Override public void onCreate(Bundle b) {
+        super.onCreate(b);
+        if (Build.VERSION.SDK_INT >= 33 &&
+            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 100);
+        }
+
+        LinearLayout l = new LinearLayout(this);
 
         LinearLayout l = new LinearLayout(this);
         l.setOrientation(LinearLayout.VERTICAL);
